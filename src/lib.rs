@@ -1,4 +1,5 @@
 // bstring
+//! TODO add crate level documentation
 
 #![allow(unused)]
 #![feature(const_trait_impl, const_convert, const_cmp)]
@@ -10,7 +11,7 @@ mod bstring;
 pub use bstr::BStr;
 
 #[doc(inline)]
-pub use bstring::BString;
+pub use bstring::ByteString;
 
 /// The Unicode replacement character: `�`.
 /// 

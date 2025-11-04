@@ -11,17 +11,17 @@ use crate::BStr;
 
 /// A mutable, growable sequence of bytes.
 /// 
-/// `BString` serves as an alternative to Rust's [`String`] type
+/// [`BString`] serves as an alternative to Rust's [`String`] type
 /// that allows for arbitrary byte sequences,
 /// including those that are not valid UTF-8.
 /// 
-/// `BString` is implemented as a wrapper around, and implements [`Deref`] + [`DerefMut`] to, [`Vec<u8>`].
-/// Therefore, all methods available on [`Vec<u8>`] are also available on `BString`.
+/// [`BString`] is implemented as a wrapper around, and implements [`Deref`] + [`DerefMut`] to, [`Vec<u8>`].
+/// Therefore, all methods available on [`Vec<u8>`] are also available on [`BString`].
 #[repr(transparent)]
 #[derive(Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
-pub struct BString(pub Vec<u8>);
+pub struct ByteString(pub Vec<u8>);
 
-impl BString {
+impl ByteString {
 	/// Creates a new [`BString`] from any type that can be converted into a `Vec<u8>`.
 	#[inline]
 	#[must_use]
@@ -57,7 +57,7 @@ impl BString {
 	}
 }
 
-impl Deref for BString {
+impl Deref for ByteString {
 	type Target = Vec<u8>;
 	
 	#[inline]
@@ -66,95 +66,95 @@ impl Deref for BString {
 	}
 }
 
-impl DerefMut for BString {
+impl DerefMut for ByteString {
 	#[inline]
 	fn deref_mut(&mut self) -> &mut Self::Target {
 		&mut self.0
 	}
 }
 
-impl AsRef<[u8]> for BString {
+impl AsRef<[u8]> for ByteString {
 	#[inline]
 	fn as_ref(&self) -> &[u8] {
 		self.0.as_ref()
 	}
 }
 
-impl AsRef<BStr> for BString {
+impl AsRef<BStr> for ByteString {
 	#[inline]
 	fn as_ref(&self) -> &BStr {
 		self.as_bstr()
 	}
 }
 
-impl Borrow<[u8]> for BString {
+impl Borrow<[u8]> for ByteString {
 	#[inline]
 	fn borrow(&self) -> &[u8] {
 		&self.0
 	}
 }
 
-impl Borrow<BStr> for BString {
+impl Borrow<BStr> for ByteString {
 	#[inline]
 	fn borrow(&self) -> &BStr {
 		self.as_bstr()
 	}
 }
 
-impl BorrowMut<[u8]> for BString {
+impl BorrowMut<[u8]> for ByteString {
 	#[inline]
 	fn borrow_mut(&mut self) -> &mut [u8] {
 		&mut self.0
 	}
 }
 
-impl BorrowMut<BStr> for BString {
+impl BorrowMut<BStr> for ByteString {
 	#[inline]
 	fn borrow_mut(&mut self) -> &mut BStr {
 		self.as_mut_bstr()
 	}
 }
 
-impl AsMut<[u8]> for BString {
+impl AsMut<[u8]> for ByteString {
 	#[inline]
 	fn as_mut(&mut self) -> &mut [u8] {
 		self.0.as_mut()
 	}
 }
 
-impl AsMut<BStr> for BString {
+impl AsMut<BStr> for ByteString {
 	#[inline]
 	fn as_mut(&mut self) -> &mut BStr {
 		self.as_mut_bstr()
 	}
 }
 
-impl fmt::Debug for BString {
+impl fmt::Debug for ByteString {
 	#[inline]
 	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
 		self.as_bstr().fmt(f)
 	}
 }
 
-impl fmt::Display for BString {
+impl fmt::Display for ByteString {
 	#[inline]
 	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
 		self.as_bstr().fmt(f)
 	}
 }
 
-impl<T: Into<Vec<u8>>> From<T> for BString {
+impl<T: Into<Vec<u8>>> From<T> for ByteString {
 	#[inline]
 	fn from(value: T) -> Self {
 		Self::new(value)
 	}
 }
 
-impl TryFrom<BString> for String {
+impl TryFrom<ByteString> for String {
 	type Error = FromUtf8Error;
 
 	#[inline]
-	fn try_from(this: BString) -> Result<String, FromUtf8Error> {
+	fn try_from(this: ByteString) -> Result<String, FromUtf8Error> {
 		String::from_utf8(this.0)
 	}
 }

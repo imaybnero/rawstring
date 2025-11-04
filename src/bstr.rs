@@ -10,12 +10,12 @@ use crate::UTF8_REPLACEMENT_CHARACTER;
 
 /// A transparent wrapper around a slice of bytes.
 /// 
-/// `BStr` serves as an alternative to Rust's [`str`] type
+/// [`BStr`] serves as an alternative to Rust's [`str`] type
 /// that allows for arbitrary byte sequences,
 /// including those that are not valid UTF-8.
 /// 
-/// `BStr` is implemented as a wrapper around, and implements [`Deref`] + [`DerefMut`] to, `[u8]`.
-/// Therefore, all methods available on `[u8]` are also available on `BStr`.
+/// [`BStr`] is implemented as a wrapper around, and implements [`Deref`] + [`DerefMut`] to, `[u8]`.
+/// Therefore, all methods available on `[u8]` are also available on [`BStr`].
 #[repr(transparent)]
 #[derive(Eq, Hash)] // PartialEq, PartialOrd, Ord implemented manually
 pub struct BStr(pub [u8]);
