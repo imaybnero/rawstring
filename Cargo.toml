@@ -1,6 +1,6 @@
 [package]
 name = "rawstring"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
 authors = ["imaybenero"]
 description = "A string type that can hold data which may or may not be valid UTF-8."
