@@ -24,7 +24,7 @@ pub const UTF8_REPLACEMENT_CHARACTER: char = '�';
 /// 
 /// # Examples
 /// ```
-/// # use raw_string::{RawStr, raw_str};
+/// # use rawstring::{RawStr, raw_str};
 /// // printing a string
 /// let raw: &RawStr = raw_str!("Hello, world!");
 /// assert_eq!(raw, "Hello, world!");
@@ -32,7 +32,7 @@ pub const UTF8_REPLACEMENT_CHARACTER: char = '�';
 /// assert_eq!(format!("{:?}", raw), "\"Hello, world!\"");
 /// ```
 /// ```
-/// # use raw_string::{RawStr, raw_str};
+/// # use rawstring::{RawStr, raw_str};
 /// // printing an invalid utf8 string
 /// let raw: &RawStr = raw_str!(&[b'a', 0xFF, b'b']);
 /// assert_eq!(raw, b"a\xffb");
